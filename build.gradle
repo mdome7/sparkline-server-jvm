@@ -1,0 +1,59 @@
+allprojects {
+    group 'interview.question'
+    version '1.0-SNAPSHOT'
+
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+
+    ext {
+        mainClass = "com.labs2160.sparklineserver.MainServer"
+        versions = [
+            _scala: '2.11',
+            scala: '2.11.7',
+            scalatest: '2.2.6',
+            jetty: '9.3.8.v20160314',
+            jersey: '2.15',
+            scalaLogging: '3.4.0'
+        ]
+    }
+
+    println "Project: $name"
+
+    apply plugin: 'scala'
+    apply plugin: 'idea'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    dependencies {
+        compile "org.scala-lang:scala-library:${versions.scala}"
+        compile "org.eclipse.jetty:jetty-server:${versions.jetty}"
+        compile "org.eclipse.jetty:jetty-servlet:${versions.jetty}"
+        compile "org.eclipse.jetty:jetty-servlets:${versions.jetty}"
+        compile "com.typesafe.scala-logging:scala-logging_${versions._scala}:${versions.scalaLogging}"
+        compile "org.glassfish.jersey.core:jersey-server:${versions.jersey}"
+        compile "org.glassfish.jersey.containers:jersey-container-servlet:${versions.jersey}"
+        compile "javax.ws.rs:javax.ws.rs-api:2.0.1"
+
+        compile "ch.qos.logback:logback-classic:1.1.7"
+        testCompile "org.scalatest:scalatest_${versions._scala}:2.2.6"
+        testCompile 'junit:junit:4.12'
+    }
+
+    // ------------
+    //   TASKS
+    // ------------
+    task slurp(type: JavaExec, dependsOn: classes) {
+        main = "${mainClass}"
+        classpath sourceSets.main.runtimeClasspath
+        classpath configurations.runtime
+    }
+
+    task scalaTest(dependsOn: ['testClasses'], type: JavaExec) {
+        main = 'org.scalatest.tools.Runner'
+        args = ['-R', 'build/classes/test', '-o']
+        classpath = sourceSets.test.runtimeClasspath
+    }
+}
