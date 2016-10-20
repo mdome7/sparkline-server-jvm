@@ -4,7 +4,7 @@ An HTTP server that can generate sparklines that can be used in other websites o
 
 * image/svg+xml - SVG text
 * text/html - SVG text above wrapped in html tags
-* ~~(image/png, image/jpeg, image/gif)~~ - not yet supported
+* image/png, image/jpeg -
 
 
 ## Run Tests
@@ -29,15 +29,17 @@ By default the server will run on port _8080_.
 ## Generating Sparklines
 REST endpoint:
 
-Path: **/api/sparkline.{svg|png|jpg}**
+Path: **/api/sparkline.{svg|html|png|jpg}**
+
 Method: **GET**
+
 Query Parameters:
 
 * **values** : comma-delimited values used for the sparkline
 * **w** : width of the final SVG image
 * **h** : height of the final SVG image
 
-TODO: Future parameters may include fgColor, bgColor, strokeWidth, etc
+_Future parameters may include fgColor, bgColor, strokeWidth, etc_
 
 
 
@@ -46,6 +48,9 @@ Example:
 ```
 // SVG
 http://localhost:8080/api/sparkline.svg?values=5,5,5,0,10,5,5,5&width=100&height=50
+
+// HTML
+http://localhost:8080/api/sparkline.html?values=5,5,5,0,10,5,5,5&width=100&height=50
 
 // JPEG
 http://localhost:8080/api/sparkline.jpg?values=5,5,5,0,10,5,5,5&width=100&height=50

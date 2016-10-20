@@ -21,6 +21,14 @@ class SparklineResource  extends LazyLogging {
     private val pngGenerator = new ImageSparklineGenerator(ImageSparklineGenerator.PNG)
 
     @GET
+    @Path("/sparkline.html")
+    @Produces(Array("text/html"))
+    def getHtml(@QueryParam("values") values: String,
+               @QueryParam("w") @DefaultValue("100") width: Int,
+               @QueryParam("h") @DefaultValue("20") height: Int) =
+        s"<html><body>${SvgUtil.getSvgString(values.split(',').map(_.toDouble), width, height)}</body></html>"
+
+    @GET
     @Path("/sparkline.svg")
     @Produces(Array("image/svg+xml"))
     def getSvg(@QueryParam("values") values: String,
