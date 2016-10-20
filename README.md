@@ -47,16 +47,16 @@ Example:
 
 ```
 // SVG
-http://localhost:8080/api/sparkline.svg?values=5,5,5,0,10,5,5,5&width=100&height=50
+http://localhost:8080/api/sparkline.svg?values=5,5,5,0,10,5,5,5&w=100&h=50
 
 // HTML
-http://localhost:8080/api/sparkline.html?values=5,5,5,0,10,5,5,5&width=100&height=50
+http://localhost:8080/api/sparkline.html?values=5,5,5,0,10,5,5,5&w=100&h=50
 
 // JPEG
-http://localhost:8080/api/sparkline.jpg?values=5,5,5,0,10,5,5,5&width=100&height=50
+http://localhost:8080/api/sparkline.jpg?values=5,5,5,0,10,5,5,5&w=100&h=50
 
 // PNG
-http://localhost:8080/api/sparkline.png?values=5,5,5,0,10,5,5,5&width=100&height=50
+http://localhost:8080/api/sparkline.png?values=5,5,5,0,10,5,5,5&w=100&h=50
 
 ```
 
