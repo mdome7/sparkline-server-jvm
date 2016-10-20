@@ -1,14 +1,25 @@
-package com.labs2160.sparklineserver.api.svg
+package com.labs2160.sparklineserver.core
+
+import java.io.{OutputStream, ByteArrayInputStream, InputStream}
 
 /**
- * Get the SVG points for a polyline needed for the sparkline of the given width and height
- *
- * //TODO: sacrificed more loops for readability (reconsider)
+ * Created by mike on 10/17/16.
  */
-object SvgUtil {
+class SVGSparklineGenerator extends SparklineGenerator {
+
+    override def generate(values: Seq[Double], width: Int, height: Int): InputStream = {
+        // TODO: write SVG directly to stream instead of writing complete SVG into String first
+        new ByteArrayInputStream(getSvgString(values, width, height).getBytes("UTF-8"))
+    }
+
+    override def writeToStream(outputStream: OutputStream, values: Seq[Double], width: Int, height: Int): Unit = {
+        val svg = getSvgString(values, width, height)
+        outputStream.write(svg.getBytes("UTF-8"))
+        outputStream.flush()
+    }
 
     def getSvgString(values: Seq[Double], width: Int, height: Int): String = {
-        var points = SvgUtil.getSvgPolylinePoints(values, width, height)
+        var points = getSvgPolylinePoints(values, width, height)
         var svg = new StringBuilder(
             s"""<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
                |width="${width}" height="${height}">""".stripMargin)
@@ -18,7 +29,7 @@ object SvgUtil {
         svg.toString()
     }
 
-    def getSvgPolylinePoints(values: Seq[Double], width: Int, height: Int): Seq[Tuple2[Int,Int]] = {
+    private def getSvgPolylinePoints(values: Seq[Double], width: Int, height: Int): Seq[Tuple2[Int,Int]] = {
         if (values.isEmpty) throw new IllegalArgumentException("values cannot be empty")
         if (height < 2) throw new IllegalArgumentException("height must be 2 or greater")
 

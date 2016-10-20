@@ -29,7 +29,7 @@ By default the server will run on port _8080_.
 ## Generating Sparklines
 REST endpoint:
 
-Path: **/api**
+Path: **/api/sparkline.{svg|png|jpg}**
 Method: **GET**
 Query Parameters:
 
@@ -39,18 +39,19 @@ Query Parameters:
 
 TODO: Future parameters may include fgColor, bgColor, strokeWidth, etc
 
+
+
 Example:
 
 ```
-target='http://localhost:8080/api?values=5,5,5,0,10,5,5,5&width=100&height=50'
+// SVG
+http://localhost:8080/api/sparkline.svg?values=5,5,5,0,10,5,5,5&width=100&height=50
 
-### Returns SVG (default)
-curl -v $target
+// JPEG
+http://localhost:8080/api/sparkline.jpg?values=5,5,5,0,10,5,5,5&width=100&height=50
 
-### Returns HTML (good for embedding sparklines in iframes)
-curl -v -H 'Accept: text/html' $target
+// PNG
+http://localhost:8080/api/sparkline.png?values=5,5,5,0,10,5,5,5&width=100&height=50
 
-### Returns PNG,JPEG,GIF image
-(TODO: not yet supported)
 ```
 
