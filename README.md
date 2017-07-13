@@ -4,7 +4,7 @@ An HTTP server that can generate sparklines that can be used in other websites o
 
 * image/svg+xml - SVG text
 * text/html - SVG text above wrapped in html tags
-* image/png, image/jpeg -
+* image/png, image/jpeg - standard image formats
 
 
 ## Run Tests
@@ -19,9 +19,14 @@ By default the server will run on port _8080_.
 
 ### Developing locally
 
+Build and run the code:
+
 ```
 ./gradlew build slurp
 ```
+
+The command above will start an HTTP server listening on port 8080.  See example URLs below and try it out!
+
 
 ### Running on Docker
 (TODO)
