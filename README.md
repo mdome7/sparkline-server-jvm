@@ -29,7 +29,13 @@ The command above will start an HTTP server listening on port 8080.  See example
 
 
 ### Running on Docker
-(TODO)
+
+Example
+```
+./gradlew buildDocker
+
+docker run -p 8080:8080 mdome7/sparkline-server-jvm:1.0-SNAPSHOT
+```
 
 ## Generating Sparklines
 REST endpoint:

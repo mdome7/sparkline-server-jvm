@@ -4,4 +4,5 @@
 *.swp
 *.MF
 .DS_STORE
+**/.gradle/*
 build
