@@ -7,7 +7,7 @@ import java.io.{OutputStream, InputStream}
  */
 trait SparklineGenerator {
 
-    def generate(values: Seq[Double], width: Int, height: Int): InputStream
+    def generate(values: Seq[Double], canvasOptions: CanvasOptions, strokeOptions: StrokeOptions): InputStream
 
-    def writeToStream(outputStream: OutputStream, values: Seq[Double], width: Int, height: Int): Unit
+    def writeToStream(outputStream: OutputStream, values: Seq[Double], canvasOptions: CanvasOptions, strokeOptions: StrokeOptions): Unit
 }

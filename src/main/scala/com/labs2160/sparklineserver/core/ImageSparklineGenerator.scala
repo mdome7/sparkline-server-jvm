@@ -14,13 +14,13 @@ import org.apache.batik.transcoder.image.{JPEGTranscoder, ImageTranscoder, PNGTr
  */
 class ImageSparklineGenerator(imageType: ImageType) extends SparklineGenerator {
 
-    override def generate(values: Seq[Double], width: Int, height: Int): InputStream = {
+    override def generate(values: Seq[Double], canvasOptions: CanvasOptions, strokeOptions: StrokeOptions): InputStream = {
         throw new NotImplementedError()
     }
 
-    override def writeToStream(os: OutputStream, values: Seq[Double], width: Int, height: Int): Unit = {
+    override def writeToStream(os: OutputStream, values: Seq[Double], canvasOptions: CanvasOptions, strokeOptions: StrokeOptions): Unit = {
 
-        val svg = SvgUtil.getSvgString(values, width, height)
+        val svg = SvgUtil.getSvgString(values, canvasOptions, strokeOptions)
         val is = new ByteArrayInputStream(svg.getBytes("UTF-8"))
 
         imageType.transcoder.transcode(new TranscoderInput(is), new TranscoderOutput(os))

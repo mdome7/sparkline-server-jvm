@@ -48,17 +48,23 @@ Query Parameters:
 
 * **values** : comma-delimited values used for the sparkline
 * **w** : width of the final SVG image
+  * default is 100
 * **h** : height of the final SVG image
-
-_Future parameters may include fgColor, bgColor, strokeWidth, etc_
-
+  * default is 20
+* **lineColor** : color of the line (e.g. "#0000FF", "blue")
+  * defaults "blue"
+* **lineSize** : width (in pixels) of the line to draw
+  * default is 1
+* **bgColor** : color of the background (e.g. "#00FF00", "green")
+  * default is no color or transparent for svg, html and png formats
+  * default is white for jpg format
 
 
 Example:
 
 ```
 // SVG
-http://localhost:8080/api/sparkline.svg?values=5,5,5,0,10,5,5,5&w=100&h=50
+http://localhost:8080/api/sparkline.svg?values=5,5,5,0,10,5,5,5&w=100&h=50&line
 
 // HTML
 http://localhost:8080/api/sparkline.html?values=5,5,5,0,10,5,5,5&w=100&h=50

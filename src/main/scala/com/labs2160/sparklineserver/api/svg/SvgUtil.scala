@@ -1,5 +1,7 @@
 package com.labs2160.sparklineserver.api.svg
 
+import com.labs2160.sparklineserver.core.{CanvasOptions, Color, StrokeOptions}
+
 /**
  * Get the SVG points for a polyline needed for the sparkline of the given width and height
  *
@@ -7,12 +9,26 @@ package com.labs2160.sparklineserver.api.svg
  */
 object SvgUtil {
 
-    def getSvgString(values: Seq[Double], width: Int, height: Int): String = {
+    def getSvgString(values: Seq[Double], width: Int, height: Int, strokeColor: Color = Color.Black): String = {
+        getSvgString(values, new CanvasOptions(width, height), new StrokeOptions(strokeColor))
+    }
+
+    def getSvgString(values: Seq[Double], canvasOptions: CanvasOptions, strokeOptions: StrokeOptions): String = {
+        val width = canvasOptions.width
+        val height = canvasOptions.height
+
         var points = SvgUtil.getSvgPolylinePoints(values, width, height)
         var svg = new StringBuilder(
             s"""<svg xmlns="http://www.w3.org/2000/svg" version="1.1"
                |width="${width}" height="${height}">""".stripMargin)
-        svg.append("""<polyline style="fill: none; stroke: blue; stroke-width: 1" points="""")
+
+        if (canvasOptions.color.isDefined) {
+            svg.append(s"""<rect width="100%" height="100%" fill="${canvasOptions.color.get.value}" />""")
+        }
+
+        svg.append(
+            s"""<polyline style="fill: none; stroke: ${strokeOptions.color.value};
+               |stroke-width: ${strokeOptions.width}" points="""".stripMargin)
         points.foldLeft(svg) { (svg, p) => {svg.append(p._1).append(",").append(p._2).append(" ")}}
         svg.append("""" /></svg>""")
         svg.toString()
