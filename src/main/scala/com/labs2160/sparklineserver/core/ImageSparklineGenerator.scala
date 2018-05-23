@@ -1,7 +1,6 @@
 package com.labs2160.sparklineserver.core
 
 import java.io.{ByteArrayInputStream, OutputStream, InputStream}
-import javax.ws.rs.core.StreamingOutput
 
 import com.labs2160.sparklineserver.api.svg.SvgUtil
 import com.labs2160.sparklineserver.core.ImageSparklineGenerator.ImageType
